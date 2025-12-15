@@ -23,11 +23,11 @@ const operations = {
 
 let num1 = 0; 
 let num2 = 0;
-let operator = NaN;
+let operator = "";
 
 function operate(num1, num2, operation) {
-    console.log(`${num1}${operator}${num2}`);
-    switch (operation) {
+    operator = operation;
+    switch (operator) {
         case "+":
             return add(num1, num2);
             break;
@@ -44,3 +44,4 @@ function operate(num1, num2, operation) {
             console.log(`${operator} is not a valid operation`);
     };
 };
+
