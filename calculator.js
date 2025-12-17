@@ -53,8 +53,12 @@ function updateDisplay (val) {
     opperationArr.push(val)
     calcDisplay.textContent = calcDisplay.textContent + val;
     if(opperationArr.length === 3) {
-        console.log(opperationArr);
-        calcDisplay.textContent= operate(opperationArr);
+        console.log(`array filled ${opperationArr}`);
+        let result = operate(opperationArr);
+        calcDisplay.textContent = result;
+        opperationArr = [result];
+        console.log(opperationArr)
+        console.log(`${opperationArr} has been stored ready for next operation`)
     };
 
 };
