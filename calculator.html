@@ -7,17 +7,16 @@
     <link rel="stylesheet" href="calculator.css">
 </head>
 <body>
-    <script src="calculator.js"></script>
     <div class="mainBox">
         <div class="display">
-            <p>3 + 5</p>
+            <p id="calcDisplay"></p>
         </div>
         <div class="buttonBox">
             <div class="fistRow">
                 <button class="calcBttns number">7</button>
                 <button class="calcBttns number">8</button>
                 <button class="calcBttns number">9</button>
-                <button class="calcBttns sign">+</button>
+                <button class="calcBttns sign" id="addBttn" value="+">+</button>
             </div>
             <div class="secondRow">
                 <button class="calcBttns number">4</button>
@@ -26,8 +25,8 @@
                 <button class="calcBttns sign">-</button>
             </div>
             <div class="thirdRow">
-                <button class="calcBttns number">1</button>
-                <button class="calcBttns number">2</button>
+                <button class= "calcBttns number" id= "num1" value= "1">1</button>
+                <button class="calcBttns number" id="num2" value="2">2</button>
                 <button class="calcBttns number">3</button>
                 <button class="calcBttns sign">*</button>
             </div>
@@ -43,5 +42,6 @@
         </div>
     </div>
     
+    <script src="calculator.js"></script>
 </body>
 </html>
