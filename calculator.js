@@ -14,62 +14,110 @@ function divide (a, b) {
     return a/b;
 };
 
-const operations = {
-    "add": add(),
-    "subtract": subtract(),
-    "multiply": multiply(),
-    "divide": divide(),
-};
+let num1 = "";
+let opperator = "";
+let num2 = "";
+const calcDisplay = document.querySelector("#calcDisplay");
 
-let num1 = 0; 
-let num2 = 0;
-let operator = "";
-
-function operate(arr) {
-    [num1, operator, num2] = arr;
-    switch (operator) {
+function operate(a, b, c) {
+    [a, c] = [Number(a), Number(c)];
+    switch (b) {
         case "+":
-            return add(num1, num2);
+            return add(a, c);
             break;
         case "-":
-            return subtract(num1, num2);
+            return subtract(a, c);
             break;
         case "*":
-            return multiply(num1, num2);
+            return multiply(a, c);
             break;
         case "/":
-            return divide(num1, num2);
+            return divide(a, c);
             break;
         default: 
             console.log(`${operator} is not a valid operation`);
     };
 };
 
-const calcDisplay = document.querySelector("#calcDisplay");
 
-let opperationArr = []
-
-function updateDisplay (val) {
-    opperationArr.push(val)
+function display (val) {
     calcDisplay.textContent = calcDisplay.textContent + val;
-    if(opperationArr.length === 3) {
-        console.log(`array filled ${opperationArr}`);
-        let result = operate(opperationArr);
-        calcDisplay.textContent = result;
-        opperationArr = [result];
-        console.log(opperationArr)
-        console.log(`${opperationArr} has been stored ready for next operation`)
+};
+
+function saveNum (val) {
+    if (opperator === "") {
+        num1 = num1 + val;
+        console.log(`num1 = ${num1}`);
+    } else {
+        num2 = num2 + val;
+        console.log(`num2 = ${num2}`);
+    };
+};
+
+function saveopperator (val) {
+    opperator = val;
+    console.log(`opperator = ${opperator}`);
+};
+
+function numClicked (number) {
+    saveNum(number);
+    display(number);
+};
+
+function signClicked (sign) {
+    if (!(num1 === "") && !(num2 === "")) {
+        num1 = operate(num1, opperator, num2);
+        opperator = "";
+        num2 = "";
+    } else if (num2 === "") {
+        calcDisplay.textContent = calcDisplay.textContent;
+    }
+    saveopperator(sign);
+    display(sign);  
+    console.log(`num1 = ${num1} \n num2 = ${num2} \n opperator = ${opperator}`)
+};
+
+function equalSign () {
+    if (num2 === "") {
+        calcDisplay.textContent = "";
+        num1 = "";
+        opperator = "";
+        num2 = "";
     };
 
+    let ans = operate(num1, opperator, num2);
+    calcDisplay.textContent = ans;
+    num1 = ans;
+    opperator = "";
+    num2 = "";
+    console.log(`answer is ${ans}, num1 is ${num1}, num2 is ${num2}, opperator is ${opperator}`)
+};
+
+function MemoryClear () {
+    calcDisplay.textContent = "";
+    num1 = "";
+    opperator = "";
+    num2 = "";
 };
 
 const bttn1 = document.querySelector("#num1");
-bttn1.addEventListener("click", () => updateDisplay(Number(bttn1.value)));
+bttn1.addEventListener("click", () => numClicked(bttn1.value));
 
 const addBttn = document.querySelector("#addBttn");
-addBttn.addEventListener("click", () => updateDisplay(addBttn.value));
+addBttn.addEventListener("click", () => signClicked(addBttn.value));
 
 const bttn2 = document.querySelector("#num2");
-bttn2.addEventListener("click", () => updateDisplay(Number(bttn2.value)));
+bttn2.addEventListener("click", () => numClicked(bttn2.value));
+
+const clearBttn = document.querySelector("#clearBttn");
+clearBttn.addEventListener("click", () => MemoryClear());
+
+const equalBttn = document.querySelector("#equalBttn");
+equalBttn.addEventListener("click", () => equalSign())
+
+const multiplyBttn = document.querySelector("#multiplyBttn");
+multiplyBttn.addEventListener("click", () => signClicked(multiplyBttn.value));
+
+
 
 
