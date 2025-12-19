@@ -17,6 +17,7 @@ function divide (a, b) {
 let num1 = "";
 let opperator = "";
 let num2 = "";
+let resultOfOperation = "";
 const calcDisplay = document.querySelector("#calcDisplay");
 
 function operate(a, b, c) {
@@ -45,7 +46,14 @@ function display (val) {
 };
 
 function saveNum (val) {
-    if (opperator === "") {
+    if (!(resultOfOperation === "") && (opperator === "")) {
+        num1 = val;
+        calcDisplay.textContent = "";
+        opperator = "";
+        num2 = "";
+        resultOfOperation = "";
+        console.log("resetting values");
+    } else if (opperator === "") {
         num1 = num1 + val;
         console.log(`num1 = ${num1}`);
     } else {
@@ -83,14 +91,15 @@ function equalSign () {
         num1 = "";
         opperator = "";
         num2 = "";
+        resultOfOperation = "";
     };
 
-    let ans = operate(num1, opperator, num2);
-    calcDisplay.textContent = ans;
-    num1 = ans;
+    resultOfOperation = operate(num1, opperator, num2);
+    calcDisplay.textContent = resultOfOperation;
+    num1 = resultOfOperation;
     opperator = "";
     num2 = "";
-    console.log(`answer is ${ans}, num1 is ${num1}, num2 is ${num2}, opperator is ${opperator}`)
+    console.log(`resultOfOperationwer is ${resultOfOperation}, num1 is ${num1}, num2 is ${num2}, opperator is ${opperator}`)
 };
 
 function MemoryClear () {
@@ -98,6 +107,7 @@ function MemoryClear () {
     num1 = "";
     opperator = "";
     num2 = "";
+    resultOfOperation = "";
 };
 
 const bttn1 = document.querySelector("#num1");
