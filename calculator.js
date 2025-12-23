@@ -78,10 +78,11 @@ function numClicked (number) {
 };
 
 function signClicked (sign) {
-    if (!(num1 === "") && !(num2 === "")) {
+    if (!(num1 === "") && !(num2 === "")) { //ensure first two numbers are used in calculation before the third
         num1 = operate(num1, opperator, num2);
         opperator = "";
         num2 = "";
+        console.log("im running")
     } else if (num2 === "") {
         calcDisplay.textContent = calcDisplay.textContent;
     };
@@ -98,6 +99,19 @@ function equalSign () {
         opperator = "";
         num2 = "";
         resultOfOperation = "";
+    } else if (Number.isNaN(num1) || Number.isNaN(num2)) {
+        calcDisplay.textContent = "error";
+        num1 = "";
+        opperator = "";
+        num2 = "";
+        resultOfOperation = "";
+    } else {
+        resultOfOperation = operate(num1, opperator, num2);
+        calcDisplay.textContent = resultOfOperation;
+        num1 = resultOfOperation;
+        opperator = "";
+        num2 = "";
+        console.log(`resultOfOperatione is ${resultOfOperation}, num1 is ${num1}, num2 is ${num2}, opperator is ${opperator}`);
     };
 
     resultOfOperation = operate(num1, opperator, num2);
@@ -117,16 +131,6 @@ function MemoryClear () {
     resultOfOperation = "";
 };
 
-function enableDecimal () {
-    decimalBttn.disabled = true;
-};
-
-function disableDecimal () {
-    decimalBttn.disabled = false;
-}
-
-const decimalBttn = document.querySelector("#decimalBttn");
-
 const bttn1 = document.querySelector("#num1");
 bttn1.addEventListener("click", () => numClicked(bttn1.value));
 
@@ -140,7 +144,6 @@ const clearBttn = document.querySelector("#clearBttn");
 clearBttn.addEventListener("click", () => MemoryClear());
 
 const equalBttn = document.querySelector("#equalBttn");
-equalBttn.addEventListener("click", () => equalSign());
 
 const multiplyBttn = document.querySelector("#multiplyBttn");
 multiplyBttn.addEventListener("click", () => signClicked(multiplyBttn.value));
