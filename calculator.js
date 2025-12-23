@@ -36,7 +36,7 @@ function operate(a, b, c) {
             return divide(a, c);
             break;
         default: 
-            console.log(`${operator} is not a valid operation`);
+            console.log(`${b} is not a valid operation`);
     };
 };
 
@@ -45,20 +45,25 @@ function display (val) {
     calcDisplay.textContent = calcDisplay.textContent + val;
 };
 
-function saveNum (val) {
-    if (!(resultOfOperation === "") && (opperator === "")) {
+function saveVal (val) {
+    let resultOfOperationIsEmpty = (resultOfOperation === "");
+    let operatorIsEmpty = (opperator = "");
+
+    if (!resultOfOperationIsEmpty && operatorIsEmpty) {
         num1 = val;
         calcDisplay.textContent = "";
         opperator = "";
         num2 = "";
         resultOfOperation = "";
+        enableDecimal();
         console.log("resetting values");
+        
     } else if (opperator === "") {
         num1 = num1 + val;
-        console.log(`num1 = ${num1}`);
+        enableDecimal();
     } else {
         num2 = num2 + val;
-        console.log(`num2 = ${num2}`);
+        enableDecimal();
     };
 };
 
@@ -68,7 +73,7 @@ function saveopperator (val) {
 };
 
 function numClicked (number) {
-    saveNum(number);
+    saveVal(number);
     display(number);
 };
 
@@ -79,14 +84,15 @@ function signClicked (sign) {
         num2 = "";
     } else if (num2 === "") {
         calcDisplay.textContent = calcDisplay.textContent;
-    }
+    };
     saveopperator(sign);
     display(sign);  
-    console.log(`num1 = ${num1} \n num2 = ${num2} \n opperator = ${opperator}`)
+    console.log(`num1 = ${num1} \n num2 = ${num2} \n opperator = ${opperator}`);
 };
 
 function equalSign () {
-    if (num2 === "") {
+    let num2IsEmpty = (num2 === "");
+    if (num2IsEmpty) {
         calcDisplay.textContent = "";
         num1 = "";
         opperator = "";
@@ -99,7 +105,8 @@ function equalSign () {
     num1 = resultOfOperation;
     opperator = "";
     num2 = "";
-    console.log(`resultOfOperationwer is ${resultOfOperation}, num1 is ${num1}, num2 is ${num2}, opperator is ${opperator}`)
+    console.log(`resultOfOperationwer is ${resultOfOperation}, num1 is ${num1}, num2 is ${num2}, opperator is ${opperator}`);
+    
 };
 
 function MemoryClear () {
@@ -109,6 +116,16 @@ function MemoryClear () {
     num2 = "";
     resultOfOperation = "";
 };
+
+function enableDecimal () {
+    decimalBttn.disabled = true;
+};
+
+function disableDecimal () {
+    decimalBttn.disabled = false;
+}
+
+const decimalBttn = document.querySelector("#decimalBttn");
 
 const bttn1 = document.querySelector("#num1");
 bttn1.addEventListener("click", () => numClicked(bttn1.value));
@@ -123,10 +140,13 @@ const clearBttn = document.querySelector("#clearBttn");
 clearBttn.addEventListener("click", () => MemoryClear());
 
 const equalBttn = document.querySelector("#equalBttn");
-equalBttn.addEventListener("click", () => equalSign())
+equalBttn.addEventListener("click", () => equalSign());
 
 const multiplyBttn = document.querySelector("#multiplyBttn");
 multiplyBttn.addEventListener("click", () => signClicked(multiplyBttn.value));
+
+const numBttns = document.querySelectorAll("#number");
+numBttns.forEach(bttn => bttn.addEventListener("click", () => numClicked(bttn.value)))
 
 
 
