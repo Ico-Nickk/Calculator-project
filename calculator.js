@@ -55,15 +55,12 @@ function saveVal (val) {
         opperator = "";
         num2 = "";
         resultOfOperation = "";
-        enableDecimal();
         console.log("resetting values");
         
     } else if (opperator === "") {
         num1 = num1 + val;
-        enableDecimal();
     } else {
         num2 = num2 + val;
-        enableDecimal();
     };
 };
 
@@ -92,6 +89,7 @@ function signClicked (sign) {
 };
 
 function equalSign () {
+    console.log("running");
     let num2IsEmpty = (num2 === "");
     if (num2IsEmpty) {
         calcDisplay.textContent = "";
@@ -144,6 +142,7 @@ const clearBttn = document.querySelector("#clearBttn");
 clearBttn.addEventListener("click", () => MemoryClear());
 
 const equalBttn = document.querySelector("#equalBttn");
+equalBttn.addEventListener("click", () => equalSign());
 
 const multiplyBttn = document.querySelector("#multiplyBttn");
 multiplyBttn.addEventListener("click", () => signClicked(multiplyBttn.value));
