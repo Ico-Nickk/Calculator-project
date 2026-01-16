@@ -102,7 +102,7 @@ function equalSign () {
         resultOfOperation = "";
     } else {
         resultOfOperation = operate(num1, opperator, num2);
-        calcDisplay.textContent = resultOfOperation;
+        calcDisplay.textContent = resultOfOperation.toFixed(2);
         num1 = resultOfOperation;
         opperator = "";
         num2 = "";
