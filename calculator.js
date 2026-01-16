@@ -120,30 +120,18 @@ function MemoryClear () {
     resultOfOperation = "";
 };
 
-//code to activate and deactivate decimal button
+const numBttns = document.querySelectorAll(".calcBttns.number");
+numBttns.forEach(bttn => {
+    bttn.addEventListener("click", () => numClicked(bttn.value));
+});
 
-
-const decimalBttn = document.querySelector("#decimalBttn");
-decimalBttn.addEventListener("click", () => numClicked(decimalBttn.value));
-
-const bttn1 = document.querySelector("#num1");
-bttn1.addEventListener("click", () => numClicked(bttn1.value));
-
-const addBttn = document.querySelector("#addBttn");
-addBttn.addEventListener("click", () => signClicked(addBttn.value));
-
-const bttn2 = document.querySelector("#num2");
-bttn2.addEventListener("click", () => numClicked(bttn2.value));
+const signBttns = document.querySelectorAll(".calcBttns.sign");
+signBttns.forEach(bttn => {
+    bttn.addEventListener("click", () => signClicked(bttn.value));
+});
 
 const clearBttn = document.querySelector("#clearBttn");
 clearBttn.addEventListener("click", () => MemoryClear());
 
 const equalBttn = document.querySelector("#equalBttn");
 equalBttn.addEventListener("click", equalSign);
-
-const multiplyBttn = document.querySelector("#multiplyBttn");
-multiplyBttn.addEventListener("click", () => signClicked(multiplyBttn.value));
-
-
-
-
