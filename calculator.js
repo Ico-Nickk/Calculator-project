@@ -36,7 +36,6 @@ function operate(a, b, c) {
             return divide(a, c);
             break;
         default: 
-            console.log(`${b} is not a valid operation`);
     };
 };
 
@@ -49,24 +48,25 @@ function saveVal (val) {
     let resultOfOperationIsEmpty = (resultOfOperation === "");
     let operatorIsEmpty = (opperator = "");
 
-    if (!resultOfOperationIsEmpty && operatorIsEmpty) {
+    if (!(resultOfOperationIsEmpty) && operatorIsEmpty) {
         num1 = val;
+        console.log(`$num1 is ${num1}`);
         calcDisplay.textContent = "";
         opperator = "";
         num2 = "";
         resultOfOperation = "";
-        console.log("resetting values");
-        
     } else if (opperator === "") {
         num1 = num1 + val;
+        console.log(num1);
     } else {
         num2 = num2 + val;
+        console.log(`num2 is ${num2}`)
     };
 };
 
 function saveopperator (val) {
     opperator = val;
-    console.log(`opperator = ${opperator}`);
+    console.log(opperator);
 };
 
 function numClicked (number) {
@@ -79,46 +79,42 @@ function signClicked (sign) {
         num1 = operate(num1, opperator, num2);
         opperator = "";
         num2 = "";
-        console.log("im running")
     } else if (num2 === "") {
         calcDisplay.textContent = calcDisplay.textContent;
     };
     saveopperator(sign);
     display(sign);  
-    console.log(`num1 = ${num1} \n num2 = ${num2} \n opperator = ${opperator}`);
 };
 
 function equalSign () {
-    console.log("running");
     let num2IsEmpty = (num2 === "");
     if (num2IsEmpty) {
+        console.log(1);
         calcDisplay.textContent = "";
         num1 = "";
         opperator = "";
         num2 = "";
         resultOfOperation = "";
     } else if (Number.isNaN(num1) || Number.isNaN(num2)) {
+        console.log(2);
         calcDisplay.textContent = "error";
         num1 = "";
         opperator = "";
         num2 = "";
         resultOfOperation = "";
     } else {
+        console.log(3);
         resultOfOperation = operate(num1, opperator, num2);
         calcDisplay.textContent = resultOfOperation.toFixed(2);
         num1 = resultOfOperation;
         opperator = "";
         num2 = "";
-        console.log(`resultOfOperatione is ${resultOfOperation}, num1 is ${num1}, num2 is ${num2}, opperator is ${opperator}`);
     };
-
-    resultOfOperation = operate(num1, opperator, num2);
-    calcDisplay.textContent = resultOfOperation;
-    num1 = resultOfOperation;
-    opperator = "";
-    num2 = "";
-    console.log(`resultOfOperationwer is ${resultOfOperation}, num1 is ${num1}, num2 is ${num2}, opperator is ${opperator}`);
-    
+        resultOfOperation = operate(num1, opperator, num2);
+        calcDisplay.textContent = resultOfOperation;
+        num1 = resultOfOperation;
+        opperator = "";
+        num2 = "";
 };
 
 function MemoryClear () {
@@ -129,27 +125,18 @@ function MemoryClear () {
     resultOfOperation = "";
 };
 
-const bttn1 = document.querySelector("#num1");
-bttn1.addEventListener("click", () => numClicked(bttn1.value));
+const numBttns = document.querySelectorAll(".calcBttns.number");
+numBttns.forEach(bttn => {
+    bttn.addEventListener("click", () => numClicked(bttn.value));
+});
 
-const addBttn = document.querySelector("#addBttn");
-addBttn.addEventListener("click", () => signClicked(addBttn.value));
-
-const bttn2 = document.querySelector("#num2");
-bttn2.addEventListener("click", () => numClicked(bttn2.value));
+const signBttns = document.querySelectorAll(".calcBttns.sign");
+signBttns.forEach(bttn => {
+    bttn.addEventListener("click", () => signClicked(bttn.value));
+});
 
 const clearBttn = document.querySelector("#clearBttn");
 clearBttn.addEventListener("click", () => MemoryClear());
 
 const equalBttn = document.querySelector("#equalBttn");
-equalBttn.addEventListener("click", () => equalSign());
-
-const multiplyBttn = document.querySelector("#multiplyBttn");
-multiplyBttn.addEventListener("click", () => signClicked(multiplyBttn.value));
-
-const numBttns = document.querySelectorAll("#number");
-numBttns.forEach(bttn => bttn.addEventListener("click", () => numClicked(bttn.value)))
-
-
-
-
+equalBttn.addEventListener("click", equalSign);
