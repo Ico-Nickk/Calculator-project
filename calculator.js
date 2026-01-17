@@ -135,3 +135,5 @@ clearBttn.addEventListener("click", () => MemoryClear());
 
 const equalBttn = document.querySelector("#equalBttn");
 equalBttn.addEventListener("click", equalSign);
+
+//working version
