@@ -79,42 +79,39 @@ function signClicked (sign) {
         num1 = operate(num1, opperator, num2);
         opperator = "";
         num2 = "";
+        console.log("im running")
     } else if (num2 === "") {
         calcDisplay.textContent = calcDisplay.textContent;
     };
     saveopperator(sign);
     display(sign);  
+    console.log(` signClicked function is running num1 = ${num1} \n num2 = ${num2} \n opperator = ${opperator}`)
 };
 
 function equalSign () {
-    let num2IsEmpty = (num2 === "");
-    if (num2IsEmpty) {
-        console.log(1);
+    console.log("equal pressed")
+    if (num2 === "") {
         calcDisplay.textContent = "";
         num1 = "";
         opperator = "";
         num2 = "";
         resultOfOperation = "";
     } else if (Number.isNaN(num1) || Number.isNaN(num2)) {
-        console.log(2);
         calcDisplay.textContent = "error";
         num1 = "";
         opperator = "";
         num2 = "";
         resultOfOperation = "";
     } else {
-        console.log(3);
         resultOfOperation = operate(num1, opperator, num2);
         calcDisplay.textContent = resultOfOperation.toFixed(2);
         num1 = resultOfOperation;
         opperator = "";
         num2 = "";
+        console.log(`resultOfOperatione is ${resultOfOperation}, num1 is ${num1}, num2 is ${num2}, opperator is ${opperator}`);
     };
-        resultOfOperation = operate(num1, opperator, num2);
-        calcDisplay.textContent = resultOfOperation;
-        num1 = resultOfOperation;
-        opperator = "";
-        num2 = "";
+
+
 };
 
 function MemoryClear () {
@@ -140,3 +137,5 @@ clearBttn.addEventListener("click", () => MemoryClear());
 
 const equalBttn = document.querySelector("#equalBttn");
 equalBttn.addEventListener("click", equalSign);
+
+//working version
