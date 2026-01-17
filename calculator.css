@@ -32,6 +32,10 @@
 .calcBttns.sign {
     background-color: rgba(247, 129, 11, 100);
 }
+.calcBttns.specialSign {
+    background-color: rgba(197, 197, 197, 100);
+}
+
 #clearBttn {
     width: 532px;
 }
